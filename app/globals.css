@@ -1,0 +1,186 @@
+@import "tailwindcss";
+
+/* Dark mode is class-driven: `ThemeProvider` stamps `.dark` on <html> before first paint. */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Brand palette */
+  --color-brand-orange: #f97316;
+  --color-brand-orange-strong: #ea580c;
+  --color-brand-orange-soft: #fdba74;
+  --color-brand-veg: #16a34a;
+  --color-brand-white: #ffffff;
+  --color-brand-dark: #111827;
+  --color-brand-muted: #6b7280;
+  --color-brand-gray: #f3f4f6;
+  --color-brand-light-gray: #f9fafb;
+
+  /* Typography */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Fluid, app-like motion */
+  --animate-rise: rise 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-sheet: sheet-in 0.34s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-fade: fade-in 0.24s ease-out both;
+  --animate-route: route-dash 1.4s linear infinite;
+  --animate-ping-soft: ping-soft 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+  --animate-shimmer: shimmer 1.6s linear infinite;
+  --animate-bar: bar-grow 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes sheet-in {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: none;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes route-dash {
+    to {
+      stroke-dashoffset: -28;
+    }
+  }
+  @keyframes ping-soft {
+    0% {
+      transform: scale(0.75);
+      opacity: 0.65;
+    }
+    70%,
+    100% {
+      transform: scale(2.4);
+      opacity: 0;
+    }
+  }
+  @keyframes shimmer {
+    to {
+      background-position: -200% 0;
+    }
+  }
+  @keyframes bar-grow {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+}
+
+/*
+ * Glass surfaces are driven by custom properties so a component can retune
+ * opacity with `[--glass-alpha:0.85]` without fighting utility specificity.
+ */
+:root {
+  --glass-rgb: 255 255 255;
+  --glass-alpha: 0.6;
+  --glass-border-rgb: 255 255 255;
+  --glass-border-alpha: 0.65;
+  --glass-strong-rgb: 255 255 255;
+  --glass-strong-alpha: 0.86;
+  --glass-subtle-rgb: 255 255 255;
+  --glass-subtle-alpha: 0.38;
+  --glass-shadow: 0 18px 40px -24px rgb(15 23 42 / 0.35);
+  --app-base: #eef1f5;
+  --app-gradient-1: rgb(249 115 22 / 0.18);
+  --app-gradient-2: rgb(96 165 250 / 0.16);
+  --app-gradient-3: rgb(255 255 255 / 0.9);
+  color-scheme: light;
+}
+
+.dark {
+  --glass-rgb: 255 255 255;
+  --glass-alpha: 0.07;
+  --glass-border-rgb: 255 255 255;
+  --glass-border-alpha: 0.12;
+  --glass-strong-rgb: 17 22 31;
+  --glass-strong-alpha: 0.88;
+  --glass-subtle-rgb: 255 255 255;
+  --glass-subtle-alpha: 0.05;
+  --glass-shadow: 0 22px 50px -28px rgb(0 0 0 / 0.9);
+  --app-base: #08090c;
+  --app-gradient-1: rgb(249 115 22 / 0.22);
+  --app-gradient-2: rgb(56 189 248 / 0.14);
+  --app-gradient-3: rgb(255 255 255 / 0.05);
+  color-scheme: dark;
+}
+
+@utility glass {
+  background-color: rgb(var(--glass-rgb) / var(--glass-alpha));
+  border: 1px solid rgb(var(--glass-border-rgb) / var(--glass-border-alpha));
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+}
+
+@utility glass-strong {
+  background-color: rgb(var(--glass-strong-rgb) / var(--glass-strong-alpha));
+  border: 1px solid rgb(var(--glass-border-rgb) / var(--glass-border-alpha));
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+}
+
+@utility glass-subtle {
+  background-color: rgb(var(--glass-subtle-rgb) / var(--glass-subtle-alpha));
+  border: 1px solid rgb(var(--glass-border-rgb) / calc(var(--glass-border-alpha) * 0.7));
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+}
+
+/* Soft ambient gradient sitting behind the whole app shell. */
+@utility app-backdrop {
+  background-image:
+    radial-gradient(115% 70% at 100% 0%, var(--app-gradient-1), transparent 62%),
+    radial-gradient(100% 60% at 0% 100%, var(--app-gradient-2), transparent 58%),
+    linear-gradient(180deg, var(--app-gradient-3), transparent 45%);
+}
+
+@utility scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+@utility pb-safe {
+  padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+}
+
+@layer base {
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--app-base);
+  }
+
+  button,
+  [role="button"] {
+    touch-action: manipulation;
+  }
+}

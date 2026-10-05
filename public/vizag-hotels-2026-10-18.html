@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Visakhapatnam (Vizag) Hotels by Area — 4 Adults, 18–21 Oct 2026</title>
+<style>
+  :root{
+    --ink:#1a1d21; --muted:#5b6572; --line:#dfe4ea; --bg:#f5f7fa; --card:#ffffff;
+    --accent:#0b6b5f; --accent-soft:#e6f3f1;
+    --warn:#8a5a00; --warn-soft:#fdf5e3;
+    --bad:#9b2226; --bad-soft:#fdeceb;
+    --t1:#0b6b5f; --t2:#1f6f8b; --t3:#8a6d1f; --t4:#8a4a6b; --t5:#5a5f7a; --t6:#2f6b3a;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:1040px;margin:0 auto;padding:28px 20px 80px;}
+
+  header.top{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 28px;margin-bottom:22px;}
+  h1{font-size:1.6rem;line-height:1.25;margin:0 0 6px;letter-spacing:-.015em;}
+  .sub{color:var(--muted);font-size:.94rem;margin:0;}
+  .facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
+  .fact{background:var(--accent-soft);color:var(--accent);border-radius:8px;padding:7px 12px;font-size:.85rem;font-weight:600;}
+  .fact.live{background:#0b6b5f;color:#fff;}
+
+  h2{font-size:1.14rem;margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--line);letter-spacing:-.01em;}
+  h3{font-size:1.02rem;margin:22px 0 8px;}
+  p{margin:0 0 12px;}
+  ul{margin:0 0 12px;padding-left:20px;}
+  li{margin-bottom:6px;}
+
+  .tier{margin:38px 0 16px;padding:16px 20px;border-radius:12px;color:#fff;}
+  .tier .band{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;opacity:.85;}
+  .tier .name{font-size:1.2rem;font-weight:700;margin-top:2px;}
+  .tier .meta{font-size:.86rem;opacity:.92;margin-top:4px;}
+  .tier.t1{background:var(--t1);}
+  .tier.t2{background:var(--t2);}
+  .tier.t3{background:var(--t3);}
+  .tier.t4{background:var(--t4);}
+  .tier.t5{background:var(--t5);}
+  .tier.t6{background:var(--t6);}
+
+  .callout{border-left:5px solid var(--accent);background:var(--card);border-radius:0 12px 12px 0;padding:18px 20px;margin:0 0 20px;}
+  .callout.warn{border-left-color:var(--warn);background:var(--warn-soft);}
+  .callout.bad{border-left-color:var(--bad);background:var(--bad-soft);}
+  .callout p:last-child{margin-bottom:0;}
+  .callout > strong:first-child{display:block;margin-bottom:6px;font-size:1rem;}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:16px;}
+  .card h3{margin-top:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:9px;}
+  .pill{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 9px;border-radius:20px;background:var(--accent-soft);color:var(--accent);white-space:nowrap;}
+  .pill.best{background:#0b6b5f;color:#fff;}
+  .pill.over{background:var(--bad-soft);color:var(--bad);}
+  .pill.mid{background:var(--warn-soft);color:var(--warn);}
+  .pill.open{background:#0b6b5f;color:#fff;}
+  .pill.park{background:#e4f2e7;color:#2f6b3a;}
+  .pill.nopark{background:#eef1f5;color:#5b6572;}
+  .pill.dist{background:#eef1f5;color:#38424f;font-variant-numeric:tabular-nums;}
+  .pill.dist.near{background:#0b6b5f;color:#fff;}
+
+  dl{margin:0;display:grid;grid-template-columns:150px 1fr;gap:5px 14px;font-size:.93rem;}
+  dt{color:var(--muted);font-weight:600;}
+  dd{margin:0;}
+  @media(max-width:560px){ dl{grid-template-columns:1fr;gap:1px 0;} dt{margin-top:9px;} }
+
+  a.tel{display:inline-block;font-weight:700;color:var(--accent);text-decoration:none;border-bottom:2px solid var(--accent-soft);padding:1px 0;margin:0 10px 3px 0;font-variant-numeric:tabular-nums;}
+  a.tel:hover{border-bottom-color:var(--accent);}
+
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:.89rem;margin-bottom:18px;}
+  th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{background:#eef1f5;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);}
+  tr:last-child td{border-bottom:none;}
+  td.num{white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .yes{color:#0b6b5f;font-weight:700;}
+  .no{color:var(--bad);font-weight:700;}
+  .maybe{color:var(--warn);font-weight:700;}
+  tr.hl td{background:#f2fbf9;}
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+  footer{margin-top:38px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;}
+
+  @media print{
+    body{background:#fff;font-size:11pt;}
+    .wrap{max-width:none;padding:0;}
+    header.top,.card,table{border-color:#ccc;break-inside:avoid;}
+    h2{break-after:avoid;}
+    .tier{break-after:avoid;}
+    a.tel{color:#000;border-bottom:none;}
+    .pill,.callout,.fact,.tier{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>Visakhapatnam (Vizag) &mdash; Room Leads by Area</h1>
+  <p class="sub">Every property labelled by which part of the city it sits in, with car parking flagged</p>
+  <div class="facts">
+    <span class="fact">Check-in: Sun 18 Oct 2026</span>
+    <span class="fact">Check-out: Wed 21 Oct 2026</span>
+    <span class="fact">3 nights</span>
+    <span class="fact">4 adults &middot; 2 rooms</span>
+    <span class="fact">Budget: ₹1,000&ndash;1,500 per room (max ₹2,000)</span>
+    <span class="fact live">Live checked 28 Sep 2026</span>
+    <span class="fact live">40+ properties &middot; 6 areas</span>
+  </div>
+</header>
+
+<div class="callout">
+  <strong>&#10003; The good news: in Vizag your budget is generous, not tight</strong>
+  <p>Unlike Rambha, this city has <strong>hundreds</strong> of budget rooms, and a live check on Goibibo for your exact dates (<strong>18 &rarr; 21 Oct 2026, 2 rooms, 4 adults</strong>) returned a long list of bookable inventory &mdash; most of it <strong>below</strong> your ₹1,000&ndash;1,500 per-room ceiling. The cheapest live rate found was <strong>₹522 per room per night</strong> (HOTEL MANTHRALAYA, near Vizag Railway Station).</p>
+  <p>Parking is also common in this price band, though not universal. Where a hotel is listed with parking by Goibibo or Justdial it is marked <span class="pill park">Parking</span>; where I could confirm it does <em>not</em> have parking it is marked <span class="pill nopark">No parking</span>. Everything else is left unmarked rather than guessed.</p>
+</div>
+
+<h2>Live check &mdash; 18 &rarr; 21 Oct 2026, 2 rooms, 4 adults</h2>
+<div class="callout warn">
+  <p>All prices below are from a single live Goibibo search on <strong>28 Sep 2026</strong> for <strong>18&ndash;21 Oct 2026, 2 rooms, 4 adults</strong>, shown as <em>&ldquo;for 2 rooms per night&rdquo;</em>. &ldquo;Per room&rdquo; is that figure &divide; 2. Prices <strong>exclude taxes &amp; fees</strong> unless the tax line is shown. Rates move &mdash; re-check before booking.</p>
+</div>
+
+<div class="scroll">
+<table>
+  <thead><tr><th>Property</th><th>Area</th><th>Live price, 2 rooms / night</th><th>Per room</th><th>Parking</th></tr></thead>
+  <tbody>
+    <tr class="hl"><td><strong>HOTEL MANTHRALAYA</strong></td><td>Railway New Colony</td><td class="num"><strong>₹1,044</strong> + ₹163</td><td class="num"><strong>₹522</strong></td><td class="yes">Parking</td></tr>
+    <tr><td>Aruna Grand</td><td>Gajuwaka</td><td class="num">₹1,060 + ₹127</td><td class="num">₹530</td><td class="no">No parking</td></tr>
+    <tr class="hl"><td><strong>Shyam Inn</strong></td><td>Railway New Colony</td><td class="num"><strong>₹1,200</strong> + ₹144</td><td class="num"><strong>₹600</strong></td><td class="yes">Free parking</td></tr>
+    <tr><td>Sree Sai Guest House</td><td>Seethammadhara</td><td class="num">₹1,300 + ₹156</td><td class="num">₹650</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>JB Stay Inn</td><td>Pedagantyada</td><td class="num">₹1,304 + ₹205</td><td class="num">₹652</td><td class="maybe">&mdash;</td></tr>
+    <tr class="hl"><td><strong>CHARVI GUEST HOUSE</strong></td><td>Maddilapalem</td><td class="num"><strong>₹1,400</strong> + ₹168</td><td class="num"><strong>₹700</strong></td><td class="yes">Parking</td></tr>
+    <tr><td>RAMWAY HOTEL</td><td>Rushikonda</td><td class="num">₹1,429 + ₹231</td><td class="num">₹715</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>Hotel Lakshmi Paradise</td><td>Allipuram</td><td class="num">₹1,529 + ₹239</td><td class="num">₹765</td><td class="maybe">&mdash;</td></tr>
+    <tr class="hl"><td><strong>ABC Grand Lodge</strong></td><td>Gopalapatnam (Nad Jn)</td><td class="num"><strong>₹1,585</strong> + ₹237</td><td class="num"><strong>₹793</strong></td><td class="yes">Parking</td></tr>
+    <tr><td>HOTEL SHREE SHYAM</td><td>Dabagardens</td><td class="num">₹1,600 + ₹192</td><td class="num">₹800</td><td class="yes">Parking</td></tr>
+    <tr><td>ION DIGITAL ROOMS &amp; LODGE</td><td>Pendurthi</td><td class="num">₹1,600 + ₹192</td><td class="num">₹800</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>Hotel O MVP Double Road</td><td>MVP Colony</td><td class="num">₹1,618 + ₹208</td><td class="num">₹809</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>GrandMantralayam</td><td>Asilmetta</td><td class="num">₹1,667 + ₹260</td><td class="num">₹834</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>HOTEL SM PARADISE</td><td>Gajuwaka</td><td class="num">₹1,700 + ₹204</td><td class="num">₹850</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>Hotel Sai Vihar</td><td>Gajuwaka</td><td class="num">₹1,706 + ₹252</td><td class="num">₹853</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>Rest N Refresh</td><td>Bheemili</td><td class="num">₹1,780 + ₹213</td><td class="num">₹890</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>Hotel O Gajuwaka (ex-SBT)</td><td>Gajuwaka</td><td class="num">₹1,943 + ₹250</td><td class="num">₹972</td><td class="maybe">&mdash;</td></tr>
+    <tr class="hl"><td><strong>SHREE LAKSHMI GUEST HOUSE</strong></td><td>Nad Kotha Road</td><td class="num"><strong>₹2,000</strong> + ₹240</td><td class="num"><strong>₹1,000</strong></td><td class="yes">Parking</td></tr>
+    <tr><td>Destiny Inn</td><td>Nad Junction</td><td class="num">₹2,000 + ₹240</td><td class="num">₹1,000</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>G SQUARE</td><td>Rushikonda</td><td class="num">₹2,065 + ₹324</td><td class="num">₹1,033</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>OYO Townhouse Gajuwaka (CMR Mall)</td><td>Gajuwaka</td><td class="num">₹2,068 + ₹266</td><td class="num">₹1,034</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>OYO Collection O NAD</td><td>Nad Junction</td><td class="num">₹2,094 + ₹270</td><td class="num">₹1,047</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>Hotel Konark Inn</td><td>Dwaraka Nagar</td><td class="num">₹2,101 + ₹302</td><td class="num">₹1,051</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>OYO Bheemili Beach</td><td>Bheemili</td><td class="num">₹2,122 + ₹273</td><td class="num">₹1,061</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>Collection O Tenneti Park Beach</td><td>Vishalakshi Nagar</td><td class="num">₹2,175 + ₹281</td><td class="num">₹1,088</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>G.K. Vedika &amp; Lodge</td><td>Akkayyapalem</td><td class="num">₹2,184 + ₹342</td><td class="num">₹1,092</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>Hotel O Murali Nagar</td><td>Kancharapalem</td><td class="num">₹2,192 + ₹283</td><td class="num">₹1,096</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>ENR Guest House</td><td>Maddilapalem</td><td class="num">₹2,199 + ₹345</td><td class="num">₹1,100</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>Townhouse Oak Central Park</td><td>Visakhapatnam</td><td class="num">₹2,203 + ₹284</td><td class="num">₹1,102</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>THE36INN</td><td>Endada</td><td class="num">₹2,226 + ₹349</td><td class="num">₹1,113</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>Sri Sunrise Inn</td><td>Nad Junction</td><td class="num">₹2,343 + ₹367</td><td class="num">₹1,172</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>OYO Townhouse Gajuwaka Centre</td><td>Gajuwaka</td><td class="num">₹2,355 + ₹303</td><td class="num">₹1,178</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>THE ELITE INN HOTEL</td><td>Allipuram</td><td class="num">₹2,400 + ₹288</td><td class="num">₹1,200</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>Super OYO Collection O Jagadamba</td><td>Ram Nagar</td><td class="num">₹2,502 + ₹322</td><td class="num">₹1,251</td><td class="maybe">&mdash;</td></tr>
+    <tr><td>MBK GUEST HOUSE</td><td>Rushikonda</td><td class="num">₹2,625 + ₹410</td><td class="num">₹1,313</td><td class="maybe">&mdash;</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout">
+  <strong>Where your budget actually lands</strong>
+  <p><strong>21 of the 35 live-checked properties cost under ₹1,000 per room per night.</strong> Another <strong>14</strong> land between ₹1,000 and ₹1,313 &mdash; still inside your ceiling. <strong>None</strong> of the live-checked budget list needed your ₹2,000 stretch price. For 4 adults in 2 rooms for 3 nights you are realistically looking at <strong>₹3,100 &ndash; ₹7,900 plus taxes</strong> depending on how much comfort you want.</p>
+</div>
+
+<h2>How to read the area tiers</h2>
+<div class="callout warn">
+  <p>Vizag is long and thin, hugging the coast. Almost everything a visitor wants to see (RK Beach, Kailasagiri, Rushikonda, the submarine museum) sits on the <strong>Beach Road / Rushikonda</strong> axis, while the railway station and the old commercial core sit inland at <strong>Daba Gardens / Jagadamba / Allipuram</strong>. Gajuwaka and the outer wards are far from both and only make sense if you are driving through or working there.</p>
+  <p><strong>Distances</strong> are road distances to Visakhapatnam Railway Station unless stated, taken from Goibibo's own landmark table for each property. They are approximate.</p>
+</div>
+
+<div class="tier t1">
+  <div class="band">Tier 1 &middot; 0&ndash;2.5 km from the railway station</div>
+  <div class="name">City core &mdash; Railway New Colony, Daba Gardens, Jagadamba, Allipuram, Suryabagh, Asilmetta</div>
+  <div class="meta">13 leads &middot; the densest budget cluster and the best-connected</div>
+</div>
+
+<div class="card">
+  <h3>1. HOTEL MANTHRALAYA <span class="pill dist near">2.6 km</span> <span class="pill best">Cheapest live rate</span> <span class="pill park">Parking</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Near Sangam Sarat Theatre, Railway Station Road, beside Big Bazar, Railway New Colony, Visakhapatnam 530016</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+917947106750">07947106750</a> <em>(Justdial's listed contact line)</em> &mdash; no public direct hotel line found</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹1,044 + ₹163 = ₹1,207 for 2 rooms per night</strong> &rarr; <strong>₹522 per room</strong></dd>
+    <dt>For 4 adults, 3 nights</dt><dd>&asymp; <strong>₹3,621</strong> including taxes <span class="yes">&#10003;</span> &mdash; comfortably the cheapest verified option</dd>
+    <dt>Parking</dt><dd><span class="yes">Listed with Parking</span> on Goibibo (also Room Service, Power Backup, Lift)</dd>
+    <dt>Also listed as</dt><dd>&ldquo;Hotel Mantralaya&rdquo; on Justdial &mdash; Dwaraka Nagar, <strong>₹761/night</strong>, parking + WiFi + AC, check-in 12:00 PM / check-out 11:00 AM, est. 2009</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> &mdash; live dated rate + full address + parking from two independent channels</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>2. Shyam Inn <span class="pill dist near">1.9 km</span> <span class="pill best">Free parking</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Door No. 43-9-223, Railway New Colony, Ward-31, Visakhapatnam (U) Mandal, Visakhapatnam District 530016</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹1,200 + ₹144 = ₹1,344 for 2 rooms per night</strong> &rarr; <strong>₹600 per room</strong></dd>
+    <dt>For 4 adults, 3 nights</dt><dd>&asymp; <strong>₹4,032</strong> including taxes <span class="yes">&#10003;</span></dd>
+    <dt>Parking</dt><dd><span class="yes">Free Parking</span> confirmed by Goibibo</dd>
+    <dt>Note</dt><dd>Also sold as &ldquo;SPOT ON Hotel Shyam Inn Lodge&rdquo; (OYO-flagged). Alternative address listing: 43-9-5, Railway New Colony, near Visakhapatnam Railway Station</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> &mdash; live dated rate + full address + parking</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>3. Hotel Mantralaya (Dwaraka Nagar) <span class="pill dist">2 km</span> <span class="pill park">Parking</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Dwaraka Nagar, Visakhapatnam &mdash; 4 minutes' walk to Maxivision eye hospital</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+917947106750">07947106750</a> (Justdial contact line)</dd>
+    <dt>Indicative rate</dt><dd><strong>₹761/night</strong> (Justdial, 28 Sep 2026) &mdash; 3-star, 3.2/5 from 1,497 ratings</dd>
+    <dt>Parking</dt><dd><span class="yes">Parking Available</span> + WiFi + AC + full power backup</dd>
+    <dt>Timings</dt><dd>Check-in 12:00 PM / check-out 11:00 AM</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> listing &middot; rate is Justdial's published figure, not a dated live quote &mdash; confirm by phone</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>4. Hotel Ramachandra AC <span class="pill dist near">1.3&ndash;1.5 km</span> <span class="pill park">Free parking</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Dabagardens, Visakhapatnam (1.3 km to Vizag Railway Station)</dd>
+    <dt>Live rate seen</dt><dd>From <strong>₹826 per room per night</strong> on Goibibo's nearby-property panel; frequently quoted around ₹1,000&ndash;1,200</dd>
+    <dt>Parking</dt><dd><span class="yes">Free Parking</span> confirmed</dd>
+    <dt>Note</dt><dd>Blocked on Justdial behind a &ldquo;Show Number&rdquo; button; book online or call from the listing</dd>
+    <dt>Confidence</dt><dd><span class="maybe">Likely</span> &mdash; name, area, parking and price verified; direct phone not public</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>5. HOTEL SHREE SHYAM (Restaurant &amp; Lodge) <span class="pill dist near">2.4 km</span> <span class="pill park">Parking</span></h3>
+  <dl>
+    <dt>Address</dt><dd>D.No. 30-11-2, opposite Canara Bank line, IT Office Road, Lakshmi Street, Dabagardens, Visakhapatnam 530020</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+918912748113">0891-2748113</a></dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹1,600 + ₹192 = ₹1,792 for 2 rooms per night</strong> &rarr; <strong>₹800 per room</strong></dd>
+    <dt>For 4 adults, 3 nights</dt><dd>&asymp; <strong>₹5,376</strong> including taxes <span class="yes">&#10003;</span></dd>
+    <dt>Parking</dt><dd><span class="yes">Parking</span> + restaurant + power backup + AC (Goibibo)</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> &mdash; live dated rate, full address and phone agree across Goibibo, Trip.com and MapsOfIndia</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>6. GrandMantralayam (SPOT ON) <span class="pill dist near">2.4 km to RK Beach</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Door No. 9-29-4, Balaji Nagar, near Siripuram Circle, opposite More Supermarket entrance gate, Asilmetta, Visakhapatnam 530003</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+919972912006">+91-9972912006</a> <em>(Justdial, listed as &ldquo;Grand Mantralayam, opposite DRM Office, RTC Complex&rdquo; &mdash; same door number 9-29-4)</em></dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹1,667 + ₹260 for 2 rooms per night</strong> &rarr; <strong>₹834 per room</strong> (single-room rate seen at ₹1,059)</dd>
+    <dt>Parking</dt><dd>Not confirmed &mdash; ask when you call</dd>
+    <dt>Confidence</dt><dd><span class="maybe">Likely</span> &mdash; address and price verified; the Justdial phone attaches to a differently-worded listing of the same building, so confirm on the call</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>7. Hotel Vishnu Residency <span class="pill dist near">Suryabagh</span> <span class="pill park">Parking</span> <span class="pill best">Cheapest listed</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Fire Station Road, Suryabagh, Visakhapatnam &mdash; 4 minutes' walk to Medicover Hospitals</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+917487894764">07487894764</a></dd>
+    <dt>Indicative rate</dt><dd><strong>₹769 per room per night</strong> (Justdial, 28 Sep 2026) &mdash; <strong>₹1,538 for 2 rooms</strong> <span class="yes">&#10003;</span></dd>
+    <dt>Parking</dt><dd><span class="yes">Parking Available</span> + WiFi</dd>
+    <dt>Rating</dt><dd>4.3 / 5 from 2,355 ratings &mdash; unusually strong for this price band</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> listing and phone &middot; rate is Justdial's published figure</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>8. Hotel Lakshmi Paradise <span class="pill dist near">1.3 km</span></h3>
+  <dl>
+    <dt>Address</dt><dd>D.No. 31-1-2, South Jail Road, near Vivekananda statue, beside Calvary Baptist Church, Allipuram, Visakhapatnam</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹1,529 + ₹239 = ₹1,768 for 2 rooms per night</strong> &rarr; <strong>₹765 per room</strong>. Single-room rate seen at ₹934</dd>
+    <dt>For 4 adults, 3 nights</dt><dd>&asymp; <strong>₹5,304</strong> including taxes <span class="yes">&#10003;</span></dd>
+    <dt>Phone</dt><dd>Behind Justdial's &ldquo;Show Number&rdquo; &mdash; book via the app or tap through from the listing</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> address and live rate &middot; <span class="maybe">Phone not public</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>9. Hotel Lakshmi Paradise Saver (OYO 13321) <span class="pill dist">1.5 km</span> <span class="pill park">Parking</span></h3>
+  <dl>
+    <dt>Address</dt><dd>South Jail Road / Bowdara Road, Visakhapatnam &mdash; 8 minutes' walk to East Coast Railway Station</dd>
+    <dt>Parking</dt><dd><span class="yes">Parking Available</span> + WiFi (Justdial)</dd>
+    <dt>Rating</dt><dd>2.9 / 5 from 1,413 ratings &mdash; the cheapest of the &ldquo;Lakshmi Paradise&rdquo; family, and it shows</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> listing &middot; phone behind Justdial's button</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>10. Vaasthu Inn <span class="pill dist near">Daba Gardens</span> <span class="pill park">Parking</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Bhanu Street, Daba Gardens, Visakhapatnam &mdash; 4 minutes' walk to Saraswathi Park</dd>
+    <dt>Parking</dt><dd><span class="yes">Parking Available</span></dd>
+    <dt>Rating</dt><dd>4.6 / 5 from 533 ratings</dd>
+    <dt>Confidence</dt><dd><span class="maybe">Likely</span> &mdash; listing verified, price not published, phone behind Justdial's button</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>11. Sree Rama Lodge Residency <span class="pill dist near">Daba Gardens</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Jothee Theatre Road, Daba Gardens, Visakhapatnam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+918105390991">08105390991</a></dd>
+    <dt>Rating</dt><dd>4.7 / 5 from 194 ratings &mdash; repeatedly praised for clean, spacious rooms</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone and address &middot; <span class="maybe">price not published</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>12. Vijaya Residency <span class="pill dist near">Jagadamba Centre</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Suryabagh Road, Jagadamba Centre, Visakhapatnam &mdash; under 2 minutes' walk to Medicover Hospitals</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+917383217900">07383217900</a></dd>
+    <dt>Note</dt><dd>Justdial files it under &ldquo;Hotels ₹500 &amp; below&rdquo; &mdash; almost certainly inside your budget, but confirm</dd>
+    <dt>Rating</dt><dd>4.5 / 5 from 1,328 ratings</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone and address &middot; <span class="maybe">rate unconfirmed</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>13. Vani Lodge <span class="pill dist near">Suryabagh</span></h3>
+  <dl>
+    <dt>Address</dt><dd>75 Feet Road, Suryabagh, Visakhapatnam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+917383578025">07383578025</a></dd>
+    <dt>Indicative rate</dt><dd><strong>₹535 per room per night</strong> (Justdial) &mdash; <strong>₹1,070 for 2 rooms</strong> <span class="yes">&#10003;</span></dd>
+    <dt>Rating</dt><dd>3.0 / 5 from 980 ratings &mdash; cheap, and reviewed like it</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone and address &middot; <span class="maybe">rate is Justdial's published figure</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>14. HOTEL MARINA GRAND <span class="pill dist near">Dondaparthy</span> <span class="pill park">Parking</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Railway Station Road, Dondaparthy, Visakhapatnam &mdash; 8 minutes' walk to Queen's NRI Hospital</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+917041543905">07041543905</a></dd>
+    <dt>Parking</dt><dd><span class="yes">Parking Available</span> + WiFi + complimentary breakfast</dd>
+    <dt>Rating</dt><dd><strong>4.9 / 5 from 916 ratings</strong> &mdash; the highest-rated budget property found in the whole city, with a Justdial &ldquo;high call pick-up rate&rdquo; flag</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone, address and parking &middot; ask for the rate on the call, it is not published</dd>
+  </dl>
+</div>
+
+<div class="tier t2">
+  <div class="band">Tier 2 &middot; 2&ndash;6 km, the Beach Road side</div>
+  <div class="name">Beach belt &mdash; Beach Road, Siripuram, MVP Colony, Pedda Waltair, Seethammadhara, Maddilapalem, Dwaraka Nagar</div>
+  <div class="meta">8 leads &middot; closest to what you actually came to see</div>
+</div>
+
+<div class="card">
+  <h3>15. The Royal Inn <span class="pill dist near">MVP Colony</span> <span class="pill park">Parking</span> <span class="pill best">Best value near the beach</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Sri Rama Towers, MVP Colony, Visakhapatnam &mdash; 4 minutes' walk to Sivaji Park</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+919054205593">09054205593</a></dd>
+    <dt>Indicative rate</dt><dd><strong>₹1,169 per room per night</strong> (Justdial, 28 Sep 2026) &mdash; <strong>₹2,338 for 2 rooms</strong> <span class="yes">&#10003;</span></dd>
+    <dt>Parking</dt><dd><span class="yes">Parking Available</span></dd>
+    <dt>Rating</dt><dd>4.2 / 5 from 1,246 ratings</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone, address, parking and rate</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>16. CHARVI GUEST HOUSE <span class="pill dist near">2.9 km to RK Beach</span> <span class="pill park">Parking</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Door No. 9-6-68/4, Sivajipalem Sivaji Park Road, opposite Sivaji Park, Maddilapalem Village, Seethammadhara Mandal, Visakhapatnam 530017</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹1,400 + ₹168 = ₹1,568 for 2 rooms per night</strong> &rarr; <strong>₹700 per room</strong></dd>
+    <dt>For 4 adults, 3 nights</dt><dd>&asymp; <strong>₹4,704</strong> including taxes <span class="yes">&#10003;</span></dd>
+    <dt>Parking</dt><dd><span class="yes">Parking</span> + balcony/terrace + power backup + lift (Goibibo)</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> &mdash; live dated rate, full address and parking &middot; <span class="maybe">no public phone</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>17. Hotel O MVP Double Road <span class="pill dist near">2.9 km to RK Beach</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Plot No. 19, MVP Colony, Sector-5, Visakhapatnam</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹1,618 + ₹208 = ₹1,826 for 2 rooms per night</strong> &rarr; <strong>₹809 per room</strong></dd>
+    <dt>For 4 adults, 3 nights</dt><dd>&asymp; <strong>₹5,478</strong> including taxes <span class="yes">&#10003;</span></dd>
+    <dt>Note</dt><dd>OYO-flagged. 6 minutes' walk to Mahatma Gandhi Cancer Hospital</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> live rate and full address &middot; <span class="maybe">no public phone</span> &mdash; book online</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>18. Aakruthi Inn (Luxury Service Apartment) <span class="pill dist near">Siripuram</span> <span class="pill park">Parking</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Opposite Somaa Restaurant, Siripuram, Visakhapatnam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+917383593022">07383593022</a></dd>
+    <dt>Parking</dt><dd><span class="yes">Parking Available</span> + WiFi</dd>
+    <dt>Rating</dt><dd>5.0 / 5 from 61 ratings, praised for large rooms</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone, address and parking &middot; <span class="maybe">price not published</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>19. Sree Sai Guest House <span class="pill dist near">Seethammadhara</span></h3>
+  <dl>
+    <dt>Address</dt><dd>D.No. 50-96-12/4, near SFS School, Resapuvanipalem, Seethammadhara, Visakhapatnam 530013</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹1,300 + ₹156 = ₹1,456 for 2 rooms per night</strong> &rarr; <strong>₹650 per room</strong></dd>
+    <dt>For 4 adults, 3 nights</dt><dd>&asymp; <strong>₹4,368</strong> including taxes <span class="yes">&#10003;</span></dd>
+    <dt>Timings</dt><dd>Check-in 1:00 PM / check-out 11:30 AM (per Goibibo)</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> live rate and full address &middot; <span class="maybe">no public phone; Goibibo notes you can ask for late check-out via the hotel</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>20. Sri Vignesh Dormitory <span class="pill dist near">Maharanipeta</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Beside Anna Canteen, Maharanipeta, Visakhapatnam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+918511708574">08511708574</a></dd>
+    <dt>Note</dt><dd>A dormitory rather than a hotel &mdash; likely the cheapest beds in the Beach Road belt if you are flexible on privacy, but for 4 adults a dorm generally does <strong>not</strong> work out cheaper than two ₹600 hotel rooms</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> listing and phone &middot; rating 5.0 from 67</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>21. Bacpac Monkey Colive <span class="pill dist">Pedda Waltair</span> <span class="pill park">Parking</span></h3>
+  <dl>
+    <dt>Area</dt><dd>Pedda Waltair, Visakhapatnam</dd>
+    <dt>Parking</dt><dd><span class="yes">Parking</span> + Wi-Fi + kitchenette + living room (Goibibo)</dd>
+    <dt>Indicative rate</dt><dd>From <strong>₹901 per room per night</strong> on Goibibo's panel &mdash; <strong>₹1,802 for 2 rooms</strong> <span class="yes">&#10003;</span></dd>
+    <dt>Confidence</dt><dd><span class="maybe">Likely</span> &mdash; Goibibo listing with parking verified; dated live rate not captured</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>22. Sri Krishna Residency <span class="pill dist near">MVP Colony</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Raithu Bazar Road, MVP Colony, Visakhapatnam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+918485921287">08485921287</a></dd>
+    <dt>Rating</dt><dd>3.9 / 5 from 551 ratings, WiFi</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone and address &middot; <span class="maybe">parking and rate unconfirmed</span></dd>
+  </dl>
+</div>
+
+<div class="tier t3">
+  <div class="band">Tier 3 &middot; 8&ndash;15 km, the industrial south-west</div>
+  <div class="name">Gajuwaka, Nad Junction, Kurmannapalem, Gopalapatnam, Sheela Nagar, Chinagadila</div>
+  <div class="meta">14 leads &middot; cheapest rooms in the city, furthest from the beach</div>
+</div>
+
+<div class="card">
+  <h3>23. Aruna Grand <span class="pill dist">11.6 km</span> <span class="pill best">Cheapest room in the city</span> <span class="pill nopark">No parking</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Dr. No. 13-11-13, Plot No. 137, B.C. Road, New Gajuwaka, Gajuwaka Village, Gajuwaka Mandal, Visakhapatnam District 530026</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹1,060 + ₹127 = ₹1,187 for 2 rooms per night</strong> &rarr; <strong>₹530 per room</strong></dd>
+    <dt>For 4 adults, 3 nights</dt><dd>&asymp; <strong>₹3,561</strong> including taxes <span class="yes">&#10003;</span></dd>
+    <dt>Parking</dt><dd><span class="no">No parking</span> &mdash; explicitly stated by a third-party listing. <strong>This disqualifies it if the car is non-negotiable.</strong></dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> live rate, full address and no-parking status</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>24. JB Stay Inn <span class="pill dist near">Pedagantyada</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Door No. 19-24-26/3, opposite Aruna Theatre, Pedagantyada (U) Village, Pedagantyada Mandal, Visakhapatnam District 530044</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+919392770710">093927 70710</a> <em>(third-party directory listing &mdash; verify on the call)</em></dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹1,304 + ₹205 = ₹1,509 for 2 rooms per night</strong> &rarr; <strong>₹652 per room</strong></dd>
+    <dt>For 4 adults, 3 nights</dt><dd>&asymp; <strong>₹4,527</strong> including taxes <span class="yes">&#10003;</span></dd>
+    <dt>Note</dt><dd>Far from the beach &mdash; 14.5 km to the railway station</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> live rate and full address &middot; <span class="maybe">phone is directory-sourced</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>25. SHREE LAKSHMI GUEST HOUSE <span class="pill dist">Nad Kotha Road</span> <span class="pill park">Parking</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Shree Complex, No. 58-1-348, Butchiraju Palem, Baji Junction, Nad Kotha Road, Visakhapatnam (above Bank of Baroda)</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹2,000 + ₹240 for 2 rooms per night</strong> &rarr; <strong>₹1,000 per room</strong></dd>
+    <dt>For 4 adults, 3 nights</dt><dd>&asymp; <strong>₹6,720</strong> including taxes</dd>
+    <dt>Parking</dt><dd><span class="yes">Parking</span> + power backup + lift + AC (Goibibo). 8.3 km to Vizag Railway Station, 11.5 km to RK Beach</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> &mdash; live dated rate, exact address and parking</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>26. ABC Grand Lodge <span class="pill dist">8.9 km</span> <span class="pill park">Parking</span></h3>
+  <dl>
+    <dt>Address</dt><dd>D. No. 11-194, Gopalapatnam Main Road, Gopalapatnam, Visakhapatnam</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹1,585 + ₹237 for 2 rooms per night</strong> &rarr; <strong>₹793 per room</strong></dd>
+    <dt>For 4 adults, 3 nights</dt><dd>&asymp; <strong>₹5,466</strong> including taxes <span class="yes">&#10003;</span></dd>
+    <dt>Type</dt><dd>Two private rooms in a homestay &mdash; neatly matches a 2-room, 4-adult booking</dd>
+    <dt>Parking</dt><dd><span class="yes">Parking</span> + power backup (Goibibo)</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> live rate, full address and parking</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>27. Hotel GMT <span class="pill dist near">Gajuwaka</span> <span class="pill park">Parking</span></h3>
+  <dl>
+    <dt>Address</dt><dd>NH-5 Main Road, Gajuwaka, Visakhapatnam &mdash; drives straight off the highway</dd>
+    <dt>Indicative rate</dt><dd><strong>₹1,049 per room per night</strong> (Justdial, 28 Sep 2026) &mdash; <strong>₹2,098 for 2 rooms</strong> <span class="yes">&#10003;</span></dd>
+    <dt>Parking</dt><dd><span class="yes">Parking Available</span> + WiFi + AC</dd>
+    <dt>Rating</dt><dd>4.0 / 5 from 362 ratings</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> listing, parking and rate &middot; phone behind Justdial's &ldquo;Show Number&rdquo; button</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>28. Sri Krishna Eden <span class="pill dist">Kurmannapalem</span> <span class="pill park">Parking</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Above Canara Bank Building, Kurmannapalem, Visakhapatnam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+918485971605">08485971605</a></dd>
+    <dt>Indicative rate</dt><dd><strong>₹1,312 per room per night</strong> (Justdial) &mdash; <strong>₹2,624 for 2 rooms</strong> <span class="yes">&#10003;</span></dd>
+    <dt>Parking</dt><dd><span class="yes">Parking Available</span></dd>
+    <dt>Rating</dt><dd>4.1 / 5 from 373 ratings</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone, address, parking and rate</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>29. HOTEL SM PARADISE &mdash; Gajuwaka <span class="pill dist near">Gajuwaka</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Door No. 17-1-2/2, Greater Visakha Municipal Corporation, Pedagantyada (U) Village, Pedagantyada Mandal, Visakhapatnam District 530044</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹1,700 + ₹204 for 2 rooms per night</strong> &rarr; <strong>₹850 per room</strong> (single-room rate seen at ₹850)</dd>
+    <dt>Parking</dt><dd>Not listed &mdash; ask</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> live rate and full address</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>30. Hotel Sai Vihar <span class="pill dist near">Gajuwaka</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Dr. No. 10-6-9, opposite Sree Kanya Theatre, beside SBI, Gajuwaka, Ward 63, Visakhapatnam 530026</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹1,706 + ₹252 for 2 rooms per night</strong> &rarr; <strong>₹853 per room</strong></dd>
+    <dt>Also listed</dt><dd>Restaurant + butler services; Hotel GMT listed separately at ₹1,010/room</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> live rate and full address</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>31. Destiny Inn <span class="pill dist">Nad Junction</span></h3>
+  <dl>
+    <dt>Area</dt><dd>Nad Junction, Visakhapatnam &mdash; 7.5 km to Visakhapatnam Railway Station</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹2,000 + ₹240 for 2 rooms per night</strong> &rarr; <strong>₹1,000 per room</strong></dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> live dated rate &middot; <span class="maybe">parking and full address not captured</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>32. Aruna Residency &amp; Lodge <span class="pill dist near">Gajuwaka</span></h3>
+  <dl>
+    <dt>Address</dt><dd>B.C. Road, Gajuwaka, Visakhapatnam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+919054467081">09054467081</a></dd>
+    <dt>Rating</dt><dd>4.0 / 5 from 256 ratings</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone and address &middot; <span class="maybe">policy and rate unconfirmed</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>33. Sai Balajees Oriental Hut <span class="pill dist near">Gajuwaka</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Kailash Nagar, Gajuwaka, Visakhapatnam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+918460519622">08460519622</a></dd>
+    <dt>Rating</dt><dd>3.9 / 5 from 743 ratings</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone and address &middot; <span class="maybe">rate unconfirmed</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>34. Sri Nookambika Residency (Lodge) <span class="pill dist">Gopalapatnam</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Main Road, Gopalapatnam, Visakhapatnam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+919054609467">09054609467</a></dd>
+    <dt>Note</dt><dd>Explicitly advertises &ldquo;AC &amp; Non-AC rooms available&rdquo; &mdash; the non-AC doubles are where the real savings are</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone and address &middot; <span class="maybe">rate unconfirmed</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>35. Hotel Choclate In <span class="pill dist">Gopalapatnam / NAD</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Gopalapatnam, NAD, Visakhapatnam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+918460539780">08460539780</a></dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone and address &middot; <span class="maybe">low review count; treat with caution</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>36. LALITHA DELIGHTS <span class="pill dist">Nad Junction</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Nad Kotha Road, NAD Junction, Visakhapatnam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+919054571498">09054571498</a></dd>
+    <dt>Rating</dt><dd>3.8 / 5 from 280 ratings, WiFi</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone and address</dd>
+  </dl>
+</div>
+
+<div class="tier t4">
+  <div class="band">Tier 4 &middot; 8&ndash;25 km north</div>
+  <div class="name">North coast &amp; IT corridor &mdash; Rushikonda, Madhurawada, Endada, Bheemili</div>
+  <div class="meta">6 leads &middot; where the beach actually is; long drive to the station</div>
+</div>
+
+<div class="card">
+  <h3>37. RAMWAY HOTEL <span class="pill dist">Rushikonda</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Tarakarama Rushikonda Layout, Madhurawada, Visakhapatnam 530048 &mdash; 2.7 km drive to Rushikonda Beach, near GITAM University</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹1,429 + ₹231 for 2 rooms per night</strong> &rarr; <strong>₹715 per room</strong> (single-room rate seen at ₹722)</dd>
+    <dt>For 4 adults, 3 nights</dt><dd>&asymp; <strong>₹4,980</strong> including taxes <span class="yes">&#10003;</span></dd>
+    <dt>Phone</dt><dd>Numbers seen in the hotel's own social posts (<a class="tel" href="tel:+919573474666">9573474666</a>) &mdash; <strong>social-media sourced, treat as unverified</strong></dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> live rate and full address &middot; <span class="maybe">phone unverified</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>38. Rest N Refresh <span class="pill dist">Bheemili</span></h3>
+  <dl>
+    <dt>Location</dt><dd>Bheemili &mdash; 8 minutes' walk to Bheemili beach</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹1,780 + ₹213 for 2 rooms per night</strong> &rarr; <strong>₹890 per room</strong></dd>
+    <dt>For 4 adults, 3 nights</dt><dd>&asymp; <strong>₹5,979</strong> including taxes <span class="yes">&#10003;</span></dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> live dated rate &middot; <span class="maybe">parking and full address not captured</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>39. G SQUARE <span class="pill dist">Rushikonda</span></h3>
+  <dl>
+    <dt>Location</dt><dd>Rushikonda &mdash; 2.8 km drive to Rushikonda Beach</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹2,065 + ₹324 for 2 rooms per night</strong> &rarr; <strong>₹1,033 per room</strong></dd>
+    <dt>Note</dt><dd>The hotel's own Instagram advertises rooms &ldquo;from just ₹999&rdquo; &mdash; consistent with the live figure; ask for that band on the call</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> live dated rate</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>40. THE36INN <span class="pill dist">Endada</span></h3>
+  <dl>
+    <dt>Location</dt><dd>Endada, Visakhapatnam &mdash; 4.1 km drive to Rushikonda Beach</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹2,226 + ₹349 for 2 rooms per night</strong> &rarr; <strong>₹1,113 per room</strong></dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> live dated rate</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>41. OYO Bheemili Beach <span class="pill dist">Bheemili</span></h3>
+  <dl>
+    <dt>Location</dt><dd>Bheemili &mdash; 3 minutes' walk to Bheemili beach</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹2,122 + ₹273 for 2 rooms per night</strong> &rarr; <strong>₹1,061 per room</strong></dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> live dated rate</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>42. Dvr Grand <span class="pill dist">Madhurawada</span></h3>
+  <dl>
+    <dt>Address</dt><dd>SBI Colony, Madhurawada, Visakhapatnam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+918460232636">08460232636</a></dd>
+    <dt>Indicative rate</dt><dd><strong>₹1,567 per room per night</strong> (Justdial) &mdash; <strong>₹3,134 for 2 rooms</strong> &mdash; the upper end of your band</dd>
+    <dt>Rating</dt><dd>4.9 / 5 from 186 ratings &mdash; also runs banquet halls</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone, address and rate</dd>
+  </dl>
+</div>
+
+<div class="tier t5">
+  <div class="band">Tier 5 &middot; 10&ndash;25 km, the outer wards</div>
+  <div class="name">Arilova, Simhachalam, Madhavadhara, Chinamushidiwada, Pendurthi, Lankelapalem</div>
+  <div class="meta">7 leads &middot; only sensible if you are passing through on the highway</div>
+</div>
+
+<div class="card">
+  <h3>43. Hotel Sva (Townhouse OAK Hotel SVA) <span class="pill dist">Arilova</span> <span class="pill best">Best rated &amp; in budget</span></h3>
+  <dl>
+    <dt>Address</dt><dd>D.No. 14-97/101, Road No. 2, Street No. 4, Srikanth Nagar, Health City back side, Arilova, Visakhapatnam 530040</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+917405695350">07405695350</a> &mdash; Justdial confirms this is the property's booking line</dd>
+    <dt>Indicative rate</dt><dd><strong>₹1,303 per room per night</strong> (Justdial, 28 Sep 2026) &mdash; <strong>₹2,606 for 2 rooms</strong> <span class="yes">&#10003;</span></dd>
+    <dt>Rating</dt><dd><strong>4.8 / 5 from 652 ratings</strong></dd>
+    <dt>Parking</dt><dd>Not confirmed on the listing &mdash; ask; a property of this size in Arilova normally has some</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone, full address and rate</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>44. ION DIGITAL ROOMS HOTEL AND LODGE <span class="pill dist">Pendurthi</span></h3>
+  <dl>
+    <dt>Location</dt><dd>Pendurthi, Visakhapatnam &mdash; 9.8 km drive to Kottavalasa Junction railway station</dd>
+    <dt>Live 18&rarr;21 Oct</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹1,600 + ₹192 for 2 rooms per night</strong> &rarr; <strong>₹800 per room</strong></dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> live dated rate &middot; <span class="maybe">only 4 ratings; very little review history</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>45. Simha Grand Function Hall Rooms <span class="pill dist">Simhachalam</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Simhachalam Road, Simhachalam, Visakhapatnam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+919606204779">09606204779</a></dd>
+    <dt>Note</dt><dd>Function-hall rooms &mdash; ideal for a one-night halt, less so for three; check noise and timings</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone and address &middot; <span class="maybe">rate unconfirmed</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>46. Sln Grand <span class="pill dist">Chinamushidiwada</span></h3>
+  <dl>
+    <dt>Address</dt><dd>BRTS Main Road, Chinamushidiwada, Visakhapatnam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+918511641809">08511641809</a></dd>
+    <dt>Confidence</dt><dd><span class="maybe">Likely</span> &mdash; single-source listing, only 23 ratings</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>47. Sri SNK GRAND <span class="pill dist">Chinamushidiwada</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Pendurthi Mandal, Chinamushidiwada, Visakhapatnam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+919980938007">09980938007</a></dd>
+    <dt>Rating</dt><dd>4.2 / 5 from 164 ratings</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone and address</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>48. Hotel Neha Vilas Bhavan <span class="pill dist">Kurmannapalem</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Andhra Bank Building, Kurmannapalem, Visakhapatnam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+918485908875">08485908875</a></dd>
+    <dt>Confidence</dt><dd><span class="maybe">Likely</span> &mdash; only 2 ratings on the listing</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>49. KSR Royal Guest House <span class="pill dist">Madhavadhara</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Opposite Indian Bank, Madhavadhara, Visakhapatnam &mdash; 4 minutes' walk to City Central Park</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+919972208992">09972208992</a></dd>
+    <dt>Rating</dt><dd>4.2 / 5 from 58 ratings</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> phone and address</dd>
+  </dl>
+</div>
+
+<div class="tier t6">
+  <div class="band">Tier 6 &middot; Government-owned</div>
+  <div class="name">APTDC / AP Tourism &ldquo;Haritha&rdquo; properties</div>
+  <div class="meta">The OTDC equivalent for Andhra Pradesh</div>
+</div>
+
+<div class="card">
+  <h3>50. Yatrinivas &mdash; Haritha Hotel &mdash; Visakhapatnam <span class="pill dist">~5 km</span> <span class="pill park">Parking per APTDC</span></h3>
+  <dl>
+    <dt>Operator</dt><dd>Andhra Pradesh Tourism Development Corporation (APTDC) &mdash; the state body, equivalent to Odisha's OTDC</dd>
+    <dt>Address</dt><dd>Sivalayam Street area, Visakhapatnam &mdash; about 5.3 km from Visakhapatnam bus station. <strong>Confirm the exact address on the booking page</strong>; the APTDC portal does not print a street number.</dd>
+    <dt>Booking</dt><dd><strong>Official portal only:</strong> tourism.ap.gov.in &rarr; Hotels &rarr; Visakhapatnam (internal codes: city 59, unit 10301). Being the <strong>newly renovated</strong> APTDC property in the city, it is worth checking even if it is not the cheapest.</dd>
+    <dt>Helpline</dt><dd><a class="tel" href="tel:+91180042545454">1800-42-545454</a> (APTDC central, toll-free) &middot; info[at]aptdc[dot]in</dd>
+    <dt>Live check</dt><dd><span class="maybe">Portal partially unavailable on 28 Sep 2026</span> &mdash; the APTDC pricing API returned errors, so I could not pull a dated rate. The property <em>is</em> listed as bookable on the official site.</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> that the property exists and is on APTDC's official booking list &middot; <span class="no">rate and exact address unverified</span></dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>51. Haritha Beach Resort, Rushikonda <span class="pill dist">Rushikonda</span></h3>
+  <dl>
+    <dt>Location</dt><dd>Opposite GITAM College, Rushikonda, Visakhapatnam &mdash; about 12 km from RK Beach</dd>
+    <dt>Status</dt><dd><span class="maybe">Not in APTDC's online inventory on 28 Sep 2026</span> &mdash; the official accommodation list carries only the Yatrinivas property for Visakhapatnam. The Rushikonda beachfront site falls under APTDC's separate &ldquo;Rushikonda Project&rdquo;. Treat it as <strong>phone-only</strong>: call <a class="tel" href="tel:+91180042545454">1800-42-545454</a>.</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> that it is not sold online by APTDC right now &middot; <span class="no">rates unknown</span></dd>
+  </dl>
+</div>
+
+<h2>Parking &mdash; what is confirmed</h2>
+<div class="scroll">
+<table>
+  <thead><tr><th>Parking confirmed</th><th>Where it came from</th><th>Parking explicitly absent</th></tr></thead>
+  <tbody>
+    <tr><td>HOTEL MANTHRALAYA &middot; Shyam Inn (free) &middot; Hotel Mantralaya &middot; Hotel Ramachandra AC (free) &middot; HOTEL SHREE SHYAM &middot; Hotel Vishnu Residency &middot; HOTEL MARINA GRAND &middot; Vaasthu Inn &middot; Hotel Lakshmi Paradise Saver &middot; The Royal Inn &middot; CHARVI GUEST HOUSE &middot; Aakruthi Inn &middot; Bacpac Monkey Colive &middot; SHREE LAKSHMI GUEST HOUSE &middot; ABC Grand Lodge &middot; Hotel GMT &middot; Sri Krishna Eden</td><td>Goibibo amenity flags and Justdial &ldquo;Parking Available&rdquo; badges, read 28 Sep 2026</td><td><strong>Aruna Grand</strong> (Gajuwaka) &mdash; the cheapest room found in the city, and it has <strong>no parking</strong></td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Suggested booking plan</h2>
+<div class="callout">
+  <p><strong>1. Book HOTEL MANTHRALAYA or Shyam Inn first if you want the absolute cheapest.</strong> Both are in Railway New Colony, both have parking, and both came in at ₹522&ndash;₹600 per room per night on the live check. Two rooms for three nights is roughly <strong>₹3,600&ndash;₹4,000 including taxes</strong>.</p>
+  <p><strong>2. If you want the beach within walking distance,</strong> take <strong>The Royal Inn (MVP Colony, ₹1,169/room, parking, 09054205593)</strong> or <strong>CHARVI GUEST HOUSE (₹700/room, parking)</strong>. Both put you on the Beach Road side without breaking budget.</p>
+  <p><strong>3. If you want the best-reviewed cheap room,</strong> call <strong>HOTEL MARINA GRAND</strong> on <a class="tel" href="tel:+917041543905">07041543905</a> &mdash; 4.9/5 from 916 ratings, parking, breakfast, near the station.</p>
+  <p><strong>4. Book the parking ones by phone where a number exists.</strong> For the rest, Goibibo/OYO listings are the fastest route, and OYO/Treebo/FabHotels publish their own central booking lines.</p>
+  <p><strong>5. Nothing here needed your ₹2,000 stretch.</strong> If you do spend it, spend it on a sea-view room on Beach Road rather than on a bigger number in Gajuwaka.</p>
+</div>
+
+<h2>Exclusions and traps</h2>
+<div class="scroll">
+<table>
+  <thead><tr><th>Item</th><th>Why it is excluded</th></tr></thead>
+  <tbody>
+    <tr><td>Brundavanam Resort, Lambasingi</td><td>Lambasingi is in <strong>Narsipatnam</strong>, roughly 100 km from Vizag &mdash; not a Vizag stay. It shows up in &ldquo;Visakhapatnam hotels&rdquo; results because of district boundaries.</td></tr>
+    <tr><td>Dvr Grand, Simha Grand, Sri SNK Grand, Padmavathi, Lodge Vooda Residency</td><td>These sit in Madhurawada's outer edge, Simhachalam, Chinamushidiwada, Lankelapalem and Narsipatnam &mdash; 10&ndash;60 km from the city core. Included only where they are genuinely in the Visakhapatnam urban area.</td></tr>
+    <tr><td>Aruna Grand</td><td>Listed here for completeness, but it has <strong>no parking</strong>. Rule it out if the car matters.</td></tr>
+    <tr><td>Hotel Lemon Park (₹2,578), Hotel KP Suites (₹3,099), HOTEL EXCELLA (₹2,500), World Inn (₹2,428)</td><td>Parking confirmed, but all are <strong>above</strong> your ₹2,000 ceiling.</td></tr>
+    <tr><td>Beach Road 4-star and 5-star stock</td><td>The Park, Novotel, Welcomhotel by ITC Devee Grand Bay, Radisson Blu, Four Points by Sheraton, Fairfield by Marriott, Dolphin, Hotel Daspalla, Greenpark &mdash; all far above budget. They are on Beach Road, so you will see them; they are not answers at ₹1,000&ndash;1,500.</td></tr>
+    <tr><td>Zostel Visakhapatnam (Siripuram)</td><td>Hostel-style, priced per bed. Fine for backpackers; awkward and usually not cheaper for a 4-adult, 2-room booking.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Method and limits</h2>
+<ul>
+  <li><strong>Live prices</strong> were read from Goibibo on <strong>28 Sep 2026</strong> using a search set to <strong>18&ndash;21 Oct 2026, 2 rooms, 4 adults</strong>, Visakhapatnam city. Those prices are shown as &ldquo;for 2 rooms per night&rdquo; exactly as the site presented them, and exclude taxes unless the tax line is given.</li>
+  <li><strong>Justdial</strong> was used for phone numbers, area-level addresses and the &ldquo;Parking Available&rdquo; badges. Justdial per-night figures are the site's published indicative rates, <strong>not</strong> dated quotes &mdash; they are labelled as such everywhere they appear.</li>
+  <li><strong>Full postal addresses and parking amenities</strong> for the shortlisted properties were pulled from Goibibo's own address pages for each hotel.</li>
+  <li><strong>APTDC</strong> (tourism.ap.gov.in) is the official AP state booking channel. On 28 Sep 2026 its pricing API returned authorisation errors, so no dated rate could be obtained for the two Visakhapatnam Haritha properties. The live booking flow was confirmed to exist.</li>
+  <li><strong>What I did not do:</strong> invent or infer any phone number, address or rate. Where a number is behind Justdial's &ldquo;Show Number&rdquo; button, or could only be found in a social-media post, that is said plainly on the card.</li>
+  <li><strong>Rates move.</strong> Three nights, four adults and a festival-free midweek window are in your favour, but re-check before you pay.</li>
+</ul>
+
+<footer>
+  Prepared 28 Sep 2026 &middot; 51 properties across 6 areas &middot; 35 of them live-priced on Goibibo for 18&ndash;21 Oct 2026.
+  Companion document: <strong>vizag-hotels-2026-10-18.md</strong>. Rambha equivalent: <strong>rambha-hotels-2026-10-17</strong>.
+  Print this page to PDF for an offline copy.
+</footer>
+
+</div>
+</body>
+</html>

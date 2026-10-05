@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rambha Hotels by Distance — 4 Adults, 17–18 Oct 2026</title>
+<style>
+  :root{
+    --ink:#1a1d21; --muted:#5b6572; --line:#dfe4ea; --bg:#f5f7fa; --card:#ffffff;
+    --accent:#0b6b5f; --accent-soft:#e6f3f1;
+    --warn:#8a5a00; --warn-soft:#fdf5e3;
+    --bad:#9b2226; --bad-soft:#fdeceb;
+    --t0:#0b6b5f; --t1:#1f6f8b; --t2:#8a6d1f; --t3:#8a4a6b;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--bg); color:var(--ink);
+    font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    -webkit-text-size-adjust:100%;
+  }
+  .wrap{max-width:1000px;margin:0 auto;padding:28px 20px 80px;}
+
+  header.top{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:26px 28px;margin-bottom:22px;}
+  h1{font-size:1.6rem;line-height:1.25;margin:0 0 6px;letter-spacing:-.015em;}
+  .sub{color:var(--muted);font-size:.94rem;margin:0;}
+  .facts{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px;}
+  .fact{background:var(--accent-soft);color:var(--accent);border-radius:8px;padding:7px 12px;font-size:.85rem;font-weight:600;}
+  .fact.live{background:#0b6b5f;color:#fff;}
+
+  h2{font-size:1.14rem;margin:34px 0 12px;padding-bottom:8px;border-bottom:2px solid var(--line);letter-spacing:-.01em;}
+  h3{font-size:1.02rem;margin:22px 0 8px;}
+  p{margin:0 0 12px;}
+  ul{margin:0 0 12px;padding-left:20px;}
+  li{margin-bottom:6px;}
+
+  /* tier headers */
+  .tier{margin:38px 0 16px;padding:16px 20px;border-radius:12px;color:#fff;}
+  .tier .band{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;opacity:.85;}
+  .tier .name{font-size:1.2rem;font-weight:700;margin-top:2px;}
+  .tier .meta{font-size:.86rem;opacity:.92;margin-top:4px;}
+  .tier.t0{background:var(--t0);}
+  .tier.t1{background:var(--t1);}
+  .tier.t2{background:var(--t2);}
+  .tier.t3{background:var(--t3);}
+
+  .callout{border-left:5px solid var(--accent);background:var(--card);border-radius:0 12px 12px 0;padding:18px 20px;margin:0 0 20px;}
+  .callout.warn{border-left-color:var(--warn);background:var(--warn-soft);}
+  .callout.bad{border-left-color:var(--bad);background:var(--bad-soft);}
+  .callout p:last-child{margin-bottom:0;}
+  .callout > strong:first-child{display:block;margin-bottom:6px;font-size:1rem;}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:20px 22px;margin-bottom:16px;}
+  .card h3{margin-top:0;display:flex;flex-wrap:wrap;align-items:baseline;gap:9px;}
+  .pill{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 9px;border-radius:20px;background:var(--accent-soft);color:var(--accent);white-space:nowrap;}
+  .pill.best{background:#0b6b5f;color:#fff;}
+  .pill.over{background:var(--bad-soft);color:var(--bad);}
+  .pill.mid{background:var(--warn-soft);color:var(--warn);}
+  .pill.soldout{background:var(--bad);color:#fff;}
+  .pill.open{background:#0b6b5f;color:#fff;}
+  .pill.dist{background:#eef1f5;color:#38424f;font-variant-numeric:tabular-nums;}
+  .pill.dist.near{background:#0b6b5f;color:#fff;}
+
+  dl{margin:0;display:grid;grid-template-columns:140px 1fr;gap:5px 14px;font-size:.93rem;}
+  dt{color:var(--muted);font-weight:600;}
+  dd{margin:0;}
+  @media(max-width:560px){ dl{grid-template-columns:1fr;gap:1px 0;} dt{margin-top:9px;} }
+
+  a.tel{display:inline-block;font-weight:700;color:var(--accent);text-decoration:none;border-bottom:2px solid var(--accent-soft);padding:1px 0;margin:0 10px 3px 0;font-variant-numeric:tabular-nums;}
+  a.tel:hover{border-bottom-color:var(--accent);}
+
+  table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:hidden;font-size:.9rem;margin-bottom:18px;}
+  th,td{padding:10px 13px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{background:#eef1f5;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);}
+  tr:last-child td{border-bottom:none;}
+  td.num{white-space:nowrap;font-variant-numeric:tabular-nums;}
+  .yes{color:#0b6b5f;font-weight:700;}
+  .no{color:var(--bad);font-weight:700;}
+  .maybe{color:var(--warn);font-weight:700;}
+  tr.hl td{background:#f2fbf9;}
+  .scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;}
+
+  footer{margin-top:38px;padding-top:16px;border-top:1px solid var(--line);color:var(--muted);font-size:.85rem;}
+
+  @media print{
+    body{background:#fff;font-size:11pt;}
+    .wrap{max-width:none;padding:0;}
+    header.top,.card,table{border-color:#ccc;break-inside:avoid;}
+    h2{break-after:avoid;}
+    .tier{break-after:avoid;}
+    a.tel{color:#000;border-bottom:none;}
+    .pill,.callout,.fact,.tier{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <h1>Rambha (Chilika), Odisha &mdash; Room Leads by Distance</h1>
+  <p class="sub">Every property labelled by road distance from Rambha town</p>
+  <div class="facts">
+    <span class="fact">Check-in: Sat 17 Oct 2026</span>
+    <span class="fact">Check-out: Sun 18 Oct 2026</span>
+    <span class="fact">1 night</span>
+    <span class="fact">4 adults</span>
+    <span class="fact">Budget: ₹1,000&ndash;1,500</span>
+    <span class="fact live">Live checked 28 Sep 2026</span>
+    <span class="fact live">24 properties &middot; 4 tiers</span>
+  </div>
+</header>
+
+<div class="callout bad">
+  <strong>&#9888; Live check result &mdash; your best budget option has already sold out</strong>
+  <p><strong>OTDC Panthanivas Rambha (0 km)</strong> is <strong>sold out</strong> for 17&rarr;18 Oct on <em>both</em> official channels. The nearest bookable OTDC alternatives are <strong>28 km</strong> (Barkul) and <strong>44 km</strong> (Gopalpur) away.</p>
+</div>
+
+<div class="scroll">
+<table>
+  <thead><tr><th>Property</th><th>Distance</th><th>Checked on</th><th>Status 17&rarr;18 Oct</th><th>Live price</th></tr></thead>
+  <tbody>
+    <tr><td><strong>OTDC Panthanivas Rambha</strong></td><td class="num"><strong>0 km</strong></td><td>bookodisha.com (official)</td><td class="no">SOLD OUT</td><td>&ldquo;No room available with your selected date.&rdquo;</td></tr>
+    <tr><td><strong>OTDC Panthanivas Rambha</strong></td><td class="num"><strong>0 km</strong></td><td>Goibibo</td><td class="no">SOLD OUT</td><td>&ldquo;Sold Out from 17 Oct &ndash; 18 Oct&rdquo;</td></tr>
+    <tr class="hl"><td><strong>The Pearl Tower Lodge</strong></td><td class="num"><strong>0 km</strong></td><td>Goibibo</td><td class="yes">AVAILABLE</td><td><strong>₹1,567 + ₹240 = ₹1,807/room</strong></td></tr>
+    <tr><td><strong>Rambha Palace</strong></td><td class="num"><strong>0 km</strong></td><td>Goibibo</td><td class="yes">AVAILABLE</td><td>₹37,170/room</td></tr>
+    <tr class="hl"><td><strong>OTDC Panthanivas Barkul</strong></td><td class="num"><strong>~28 km</strong></td><td>bookodisha.com (official)</td><td class="yes">AVAILABLE</td><td><strong>₹6,000 for 2 rooms, 1 night</strong>, excl. GST</td></tr>
+    <tr class="hl"><td><strong>OTDC Panthanivas Gopalpur</strong></td><td class="num"><strong>~44 km</strong></td><td>bookodisha.com (official)</td><td class="yes">AVAILABLE</td><td><strong>₹1,800/room Deluxe</strong>, 2 rooms left</td></tr>
+    <tr><td>Hotel Lake Queen</td><td class="num">0 km</td><td>Trip.com</td><td class="maybe">Not accepting bookings</td><td>Phone-only</td></tr>
+    <tr><td>Laxmi Guest House</td><td class="num">0 km</td><td>no online channel</td><td class="maybe">Unknowable online &mdash; call</td><td>₹600 non-AC / ₹900 AC</td></tr>
+    <tr><td>Hotel Raj</td><td class="num">0 km</td><td>no online channel</td><td class="maybe">Unknowable online &mdash; walk in</td><td>&mdash;</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout">
+  <strong>The most important caveat on this whole sheet</strong>
+  <p>OTDC's online channels sell <strong>only Deluxe rooms, Cottages and Suites</strong>. The cheap non-AC rooms and the 10-bed dormitory <strong>were never online &mdash; they are phone-only.</strong> So &ldquo;Sold Out&rdquo; means <em>no online inventory</em>, which is <strong>not</strong> proof the property is full. Call <a class="tel" href="tel:+916810278346">06810-278346</a> or <a class="tel" href="tel:+919078885531">9078885531</a> and ask about the non-AC doubles and dormitory.</p>
+</div>
+
+<h2>How to read the distance tiers</h2>
+<div class="callout warn">
+  <p>The tiers are not decoration &mdash; they are the honest cost of the shortage. <strong>Only 6 of the 24 properties are in Rambha.</strong> The other 18 are real and many are bookable, but staying in them means a daily drive. I have not padded the Rambha count to reach 20.</p>
+  <p><strong>Distance sources:</strong> Barkul ~25 km and Balugaon ~34 km derived from the Chilika Development Authority's own road figures (Bhubaneswar&rarr;Balugaon 96 km, &rarr;Barkul 105 km, &rarr;Rambha 130 km); Pathara ~16 km and Tampara ~19 km from Trip.com distance data; Gopalpur ~44 km confirmed by three independent taxi/distance sources. All approximate road distances.</p>
+</div>
+
+<div class="tier t0">
+  <div class="band">Tier 0 &middot; 0 km</div>
+  <div class="name">Rambha town</div>
+  <div class="meta">6 properties &mdash; this is the entire market</div>
+</div>
+
+<div class="card">
+  <h3>1. OTDC Panthanivas Rambha <span class="pill dist near">0 km</span> <span class="pill soldout">Sold out for your dates</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Rambha Road, At/PO Rambha, Ganjam 761028. 34 km from Balugaon Railway Station</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+916810278346">06810-278346</a><a class="tel" href="tel:+919078885531">9078885531</a><a class="tel" href="tel:+919437514896">9437514896</a></dd>
+    <dt>Central booking</dt><dd><a class="tel" href="tel:+916742430764">0674-2430764</a><a class="tel" href="tel:+916742435618">0674-2435618</a><br>Email: info@bookodisha.com</dd>
+    <dt>Live status</dt><dd><span class="no">SOLD OUT for 17&rarr;18 Oct on both official channels.</span></dd>
+    <dt>Rooms</dt><dd>4 AC doubles, 8 non-AC doubles, 6 AC cottages, 10-bed dormitory &mdash; <strong>only Deluxe/Cottage/Suite sold online</strong></dd>
+    <dt>Rate</dt><dd>Deluxe ₹1,500 + GST, Cottage ₹2,900 + GST; 18 Oct Cottage quoted ₹5,000/night excl. GST. Non-AC double ≈ ₹550, AC double ≈ ₹990, dorm bed ≈ ₹150 on older cards &mdash; <strong>phone-only</strong></dd>
+    <dt>Check-in&nbsp;/&nbsp;out</dt><dd>11:00 AM / 9:00 AM (official)</dd>
+    <dt>Other dates</dt><dd>Goibibo quoted ₹1,918 (6, 11, 14 Oct), ₹3,841 (3, 22 Oct), ₹3,818 (26 Oct)</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> &mdash; two official channels agree on number, address, check-in times and sold-out status</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>2. Laxmi Guest House <span class="pill dist near">0 km</span> <span class="pill best">Best budget bet</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Main Road, near Girls High School, Rambha, Ganjam 761028</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+917064777788">7064777788</a></dd>
+    <dt>Live status</dt><dd><span class="maybe">No online channel</span> &mdash; call only</dd>
+    <dt>Rate</dt><dd><strong>₹600 non-AC &middot; ₹900 AC per room</strong> &rarr; 2 non-AC = <strong>₹1,200</strong> <span class="yes">&#10003;</span> &middot; 1 AC + 1 non-AC = ₹1,500 <span class="yes">&#10003;</span></dd>
+    <dt>Confidence</dt><dd><span class="maybe">Likely</span> &mdash; rate card published by the property</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>3. Hotel Lake Queen (Lodge &amp; Restaurant) <span class="pill dist near">0 km</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Chilika Lake Main Road, near Rambha High School, Rambha 761028 (2.6 km from Rambha railway station)</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+917894635702">7894635702</a></dd>
+    <dt>Live status</dt><dd><span class="maybe">&ldquo;Not currently accepting bookings&rdquo;</span> on Trip.com &mdash; phone-only</dd>
+    <dt>Rate</dt><dd>Not published; filed under the &ldquo;₹500 &amp; below&rdquo; and &ldquo;₹501&ndash;1,000&rdquo; bands &mdash; confirm, don't assume</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> name/address/phone &middot; <span class="maybe">Unverified</span> rate</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>4. The Pearl Tower Lodge <span class="pill dist near">0 km</span> <span class="pill open">Available now</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Pantha Nivas Road, Ward No. 12 / Rambha College Road, Minchini Patna, Mouza Rambha Estate, Khallikote, Ganjam 761028 (830 m to Chilika Lake)</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+919861422124">9861422124</a><a class="tel" href="tel:+916810288699">06810-288699</a></dd>
+    <dt>Live status</dt><dd><span class="yes">AVAILABLE 17&rarr;18 Oct</span> &mdash; ₹2,000 &rarr; <strong>₹1,567 + ₹240 = ₹1,807 per room</strong>; free cancellation</dd>
+    <dt>For 4 adults</dt><dd>2 rooms &asymp; <strong>₹3,614</strong> &mdash; the only Rambha room bookable online right now</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> &mdash; live dated availability</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>5. Rambha Palace by Hidden India <span class="pill dist near">0 km</span> <span class="pill over">Luxury</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Chilika Road, Rambha Estate, Rambha 761028</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+917800208002">7800200802</a><a class="tel" href="tel:+919124557844">9124557844</a><a class="tel" href="tel:+919348297966">9348297966</a><br>Email: reservations@rambhapalace.com</dd>
+    <dt>Live status</dt><dd><span class="yes">AVAILABLE</span> &mdash; <strong>₹31,500 + ₹5,670 = ₹37,170 per room</strong>, breakfast included</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> &mdash; live dated rate</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>6. Hotel Raj <span class="pill dist near">0 km</span> <span class="pill mid">No number, no online channel</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Rambha Main Road, ~140 m from Rambha bus stand, Ganjam 761028</dd>
+    <dt>Phone</dt><dd><strong>None published or verifiable</strong>; no online channel. <strong>Do not guess a number.</strong></dd>
+    <dt>Rating</dt><dd>4.7 from 14 reviews &mdash; best-reviewed small property in Rambha</dd>
+    <dt>How to reach</dt><dd>Walk in, or ask the OTDC front desk</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> to exist &middot; no contact number</dd>
+  </dl>
+</div>
+
+<div class="callout warn">
+  <strong>One further local name, unverified</strong>
+  <p>A Facebook page titled <strong>&ldquo;Rambha Resort&rdquo;</strong> posted a property video tour, but no address, phone or booking channel could be found. Left off the list rather than handed to you as a dead lead.</p>
+</div>
+
+<div class="tier t1">
+  <div class="band">Tier 1 &middot; 1&ndash;25 km</div>
+  <div class="name">Chilika lakeside &mdash; still the lake</div>
+  <div class="meta">4 properties &middot; 20&ndash;40 minute drive</div>
+</div>
+
+<div class="card">
+  <h3>7. Swosti Chilika Resort <span class="pill dist">~16 km</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Odia Alapur via Gorapali, Pathara, Ganjam 761029</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+916802227400">0680-2227400</a><a class="tel" href="tel:+919337476478">9337476478</a><a class="tel" href="tel:+919338757565">9338757565</a></dd>
+    <dt>Rate</dt><dd>₹4,900+/room &mdash; over budget</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> &mdash; Swosti group central reservation numbers</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>8. Tampara Resort <span class="pill dist">~19 km</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Tampara Lake, Chatrapur, Ganjam</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+919124084003">9124084003</a><a class="tel" href="tel:+919692886306">9692886306</a></dd>
+    <dt>Rate</dt><dd>from ~₹1,887/room &mdash; closest thing to in-budget outside Rambha</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> &mdash; published by the resort and repeated in an Odisha Tourism video</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>9. Hotel Lisa Galaxy <span class="pill dist">~20 km</span> <span class="pill mid">No number</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Chatrapur, Ganjam</dd>
+    <dt>Phone</dt><dd><strong>Not published or verifiable</strong> &mdash; directory gate blocks access</dd>
+    <dt>Confidence</dt><dd>Located, but no contact number</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>10. Pipul Odi Museum Resort <span class="pill dist">~25 km</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Barkul, via Balugaon, Khurda</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+917440002532">7440002532</a></dd>
+    <dt>Rate</dt><dd>from ₹3,000/room &mdash; over budget</dd>
+    <dt>Confidence</dt><dd><span class="maybe">Likely</span> &mdash; property's own social account</dd>
+  </dl>
+</div>
+
+<div class="tier t2">
+  <div class="band">Tier 2 &middot; 26&ndash;40 km</div>
+  <div class="name">North shore &mdash; Balugaon side</div>
+  <div class="meta">3 properties &middot; 45&ndash;60 minute drive</div>
+</div>
+
+<div class="card">
+  <h3>11. OTDC Panthanivas Barkul <span class="pill dist">~28 km</span> <span class="pill open">Available for your night</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Barkul, postal Balugaon Railway Station Road, Balugaon, Khurda 752030 (6 km from Balugaon Railway Station)</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+916756227388">06756-227388</a><a class="tel" href="tel:+919078885514">9078885514</a></dd>
+    <dt>Live status</dt><dd><span class="yes">AVAILABLE 17&rarr;18 Oct</span> &mdash; <strong>Deluxe, 266 sq ft, ₹6,000 for 2 rooms / 1 night</strong>, excl. GST</dd>
+    <dt>Also on Goibibo</dt><dd>₹3,000 &rarr; <strong>₹2,508 + ₹360 per room</strong>, free cancellation</dd>
+    <dt>Facilities</dt><dd>Bar, boating facility, conference facility, kids area, restaurant, travel desk</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> &mdash; official OTDC portal, live for your dates</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>12. Hotel Sambit Chilika Resorts <span class="pill dist">~30 km</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Pantha Nivas Road, Badkul, Mouza Pathara, Khurda 752030</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+919861715189">9861715189</a><a class="tel" href="tel:+919337030649">9337030649</a></dd>
+    <dt>Confidence</dt><dd><span class="maybe">Likely</span> &mdash; published in booking-site contact blocks</dd>
+  </dl>
+</div>
+
+<div class="card">
+  <h3>13. Digantika Hotel &amp; Restaurant <span class="pill dist">~34 km</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Main Road, Balugaon, Khurda 752030</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+917608825404">7608825404</a><a class="tel" href="tel:+917978968067">7978968067</a></dd>
+    <dt>Rate</dt><dd>budget to mid &mdash; one of the cheapest real hotels in the tier structure</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> &mdash; hotel's own website and social pages</dd>
+  </dl>
+</div>
+
+<div class="tier t3">
+  <div class="band">Tier 3 &middot; 41&ndash;50 km</div>
+  <div class="name">Gopalpur-on-Sea &mdash; a different destination</div>
+  <div class="meta">11 properties &middot; ~1 hour drive &middot; included because it has bookable rooms when Rambha does not</div>
+</div>
+
+<div class="callout warn">
+  <p>Gopalpur is a beach town, not a Chilika base. It is here because you asked for tiers reaching 20+, and because <strong>it currently has rooms bookable on your exact night when Rambha does not.</strong></p>
+</div>
+
+<div class="card">
+  <h3>14. OTDC Panthanivas Gopalpur <span class="pill dist">~44 km</span> <span class="pill open">Available for your night</span></h3>
+  <dl>
+    <dt>Address</dt><dd>Street Number 2nd, Gopalpur Cantonment, Gopalpur, Ganjam 761002. 12 km from Berhampur Railway Station</dd>
+    <dt>Phone</dt><dd><a class="tel" href="tel:+919078885524">9078885524</a><a class="tel" href="tel:+917008152752">7008152752</a></dd>
+    <dt>Live status</dt><dd><span class="yes">AVAILABLE 17&rarr;18 Oct</span> &mdash; <strong>Deluxe, 208 sq ft, ₹1,800 per room per night</strong> excl. GST, <strong>2 rooms left</strong>; also Suite (Cottage), 400 sq ft, ₹5,000/night, 1 left</dd>
+    <dt>For 4 adults</dt><dd>2 × Deluxe = <strong>₹3,600 + GST</strong> &mdash; bookable right now</dd>
+    <dt>Check-in&nbsp;/&nbsp;out</dt><dd>11:00 AM / 9:00 AM</dd>
+    <dt>Confidence</dt><dd><span class="yes">Verified</span> &mdash; official OTDC portal, live inventory count</dd>
+  </dl>
+</div>
+
+<div class="scroll">
+<table>
+  <thead><tr><th>#</th><th>Property</th><th>Distance</th><th>Phone</th><th>Confidence</th></tr></thead>
+  <tbody>
+    <tr><td>15</td><td><strong>Hotel Ocean Inn</strong><br><span style="color:#5b6572">Beach Road, Gopalpur 761002</span></td><td class="num">~44 km</td><td class="num"><a class="tel" href="tel:+919439918399">9439918399</a><a class="tel" href="tel:+919090510313">9090510313</a></td><td class="yes">Verified &mdash; own website</td></tr>
+    <tr><td>16</td><td><strong>Hotel Sea Side Breeze</strong><br><span style="color:#5b6572">Gopalpur-on-Sea 761002</span></td><td class="num">~44 km</td><td class="num"><a class="tel" href="tel:+919437325595">9437325595</a><a class="tel" href="tel:+919853364681">9853364681</a></td><td class="maybe">Likely</td></tr>
+    <tr><td>17</td><td><strong>Hotel Sea Pearl</strong><br><span style="color:#5b6572">Gopalpur, Ganjam</span><br><span style="color:#5b6572">~₹1,871 + ₹206 taxes/room</span></td><td class="num">~44 km</td><td class="num"><a class="tel" href="tel:+917381315528">7381315528</a></td><td class="maybe">Likely</td></tr>
+    <tr><td>18</td><td><strong>Hotel Kalinga</strong><br><span style="color:#5b6572">Gopalpur, Ganjam &middot; hotelkalinga.in</span></td><td class="num">~44 km</td><td class="num"><a class="tel" href="tel:+919861450803">9861450803</a><a class="tel" href="tel:+919938028498">9938028498</a></td><td class="maybe">Likely</td></tr>
+    <tr><td>19</td><td><strong>Motel Mermaid</strong><br><span style="color:#5b6572">Gopalpur, Ganjam</span></td><td class="num">~44 km</td><td class="num"><a class="tel" href="tel:+919874220857">9874220857</a></td><td class="maybe">Unverified</td></tr>
+    <tr><td>20</td><td><strong>Hotel Song Of The Sea</strong><br><span style="color:#5b6572">Near the Lighthouse, Gopalpur-on-Sea</span></td><td class="num">~44 km</td><td class="num"><a class="tel" href="tel:+919861535627">9861535627</a><a class="tel" href="tel:+919861507203">9861507203</a></td><td class="maybe">Likely</td></tr>
+    <tr><td>21</td><td><strong>Palm Regal Resort</strong><br><span style="color:#5b6572">Gopalpur, Odisha</span></td><td class="num">~44 km</td><td class="num"><a class="tel" href="tel:+917205980222">7205980222</a><a class="tel" href="tel:+917205970222">7205970222</a></td><td class="maybe">Likely</td></tr>
+    <tr><td>22</td><td><strong>Swosti Palm Resort Gopalpur</strong><br><span style="color:#5b6572">Gopalpur, Ganjam</span></td><td class="num">~44 km</td><td class="num"><a class="tel" href="tel:+916802343718">0680-2343718</a><a class="tel" href="tel:+917328839297">7328839297</a></td><td class="yes">Verified &mdash; group website</td></tr>
+    <tr><td>23</td><td><strong>MAYFAIR Palm Beach Resort</strong><br><span style="color:#5b6572">Gopalpur-on-Sea, Badaputi 761002 &middot; premium</span></td><td class="num">~44 km</td><td class="num"><a class="tel" href="tel:+919237500101">9237500101</a><a class="tel" href="tel:+916802227500">0680-2227500</a></td><td class="yes">Verified &mdash; official page</td></tr>
+    <tr><td>24</td><td><strong>Pramod Lands End Resort</strong><br><span style="color:#5b6572">Radisson Individuals, Gopalpur &middot; premium</span></td><td class="num">~44 km</td><td class="num"><a class="tel" href="tel:+919040084870">9040084870</a></td><td class="yes">Verified &mdash; official page</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Which of these can you actually book tonight?</h2>
+<div class="scroll">
+<table>
+  <thead><tr><th>Bookable online for 17&rarr;18 Oct</th><th>Distance</th><th>Price for 4 adults (2 rooms)</th></tr></thead>
+  <tbody>
+    <tr class="hl"><td><strong>The Pearl Tower Lodge</strong></td><td class="num"><strong>0 km</strong></td><td>&asymp; ₹3,614</td></tr>
+    <tr><td><strong>OTDC Panthanivas Barkul</strong></td><td class="num">~28 km</td><td>₹6,000 + GST</td></tr>
+    <tr class="hl"><td><strong>OTDC Panthanivas Gopalpur</strong></td><td class="num">~44 km</td><td>₹3,600 + GST</td></tr>
+    <tr><td>Rambha Palace</td><td class="num">0 km</td><td>&asymp; ₹74,340</td></tr>
+  </tbody>
+</table>
+</div>
+<p>Everything else in Rambha &mdash; Laxmi Guest House, Hotel Lake Queen, Hotel Raj, and OTDC Rambha's cheap non-AC rooms and dormitory &mdash; is <strong>phone-only</strong>, so no website can tell you whether it is free.</p>
+
+<h2>Your best plan</h2>
+<div class="callout">
+  <ol>
+    <li><strong>Call Laxmi Guest House</strong> (<a class="tel" href="tel:+917064777788">7064777788</a>) &mdash; the only thing that fits ₹1,000&ndash;1,500. Ask for two non-AC rooms.</li>
+    <li><strong>Call OTDC Rambha</strong> (<a class="tel" href="tel:+916810278346">06810-278346</a>) and ask directly about the <strong>non-AC doubles and 10-bed dormitory</strong>. Never sold online, so &ldquo;sold out&rdquo; does not cover them.</li>
+    <li><strong>Hold OTDC Panthanivas Gopalpur</strong> (<a class="tel" href="tel:+919078885524">9078885524</a>) as a fallback &mdash; ₹1,800/room Deluxe with 2 rooms left, but a 44 km / ~1 hour drive.</li>
+    <li><strong>If you want to be near the lake and can stretch:</strong> The Pearl Tower at ₹1,807/room, 0 km, bookable immediately.</li>
+  </ol>
+</div>
+
+<h3>What to ask when you call</h3>
+<ul>
+  <li>&ldquo;Do you have <strong>two non-AC rooms for four adults, night of 17 October</strong>, check-out 18 October?&rdquo;</li>
+  <li>&ldquo;Is the <strong>dormitory</strong> available, or a family room that sleeps four?&rdquo;</li>
+  <li>&ldquo;What is the <strong>total for both rooms</strong>, including GST?&rdquo;</li>
+  <li>&ldquo;What is the <strong>check-in time</strong> &mdash; can we check in early?&rdquo;</li>
+  <li>&ldquo;Do you arrange <strong>Chilika boating</strong> &mdash; included or extra?&rdquo;</li>
+</ul>
+
+<h3>Useful numbers</h3>
+<div class="scroll">
+<table>
+  <thead><tr><th>Purpose</th><th>Number</th></tr></thead>
+  <tbody>
+    <tr><td>OTDC Panthanivas Rambha (direct)</td><td class="num"><a class="tel" href="tel:+916810278346">06810-278346</a><a class="tel" href="tel:+919078885531">9078885531</a></td></tr>
+    <tr><td>OTDC central reservation</td><td class="num"><a class="tel" href="tel:+916742430764">0674-2430764</a><a class="tel" href="tel:+916742435618">0674-2435618</a></td></tr>
+    <tr><td>Official OTDC booking portal</td><td class="num">bookodisha.com</td></tr>
+    <tr><td>Rambha Police Station</td><td class="num"><a class="tel" href="tel:+916810278330">06810-278330</a></td></tr>
+    <tr><td>Odisha Tourism helpline</td><td class="num"><a class="tel" href="tel:+9118003456771">1800-345-6771</a></td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Excluded &mdash; names that appear as &ldquo;Rambha hotels&rdquo; but are not</h2>
+<div class="scroll">
+<table>
+  <thead><tr><th>Name</th><th>Where it actually is</th><th>Distance from Rambha</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Hotel Rambha Grand</strong><br><span class="num">9122366642</span></td><td><strong>Darbhanga, Bihar</strong></td><td class="no">Wrong state entirely</td></tr>
+    <tr><td>Santi Guest House</td><td>Patra Colony, RC Road, Bhanjanagar 761126</td><td class="num">~60 km</td></tr>
+    <tr><td>Jagannath Kalyan Mandap</td><td>Bhanjanagar 761126</td><td class="num">~60 km</td></tr>
+    <tr><td>Hotel Karttik &middot; Sahu Hotel &middot; BDA Eco-Cottage</td><td>Bhanjanagar / Gopalpur</td><td class="num">60 km / 44 km</td></tr>
+  </tbody>
+</table>
+</div>
+<p><strong>Hotel Rambha Grand</strong> is the important one: it is a real hotel with a real phone number, it appears on &ldquo;Rambha hotel&rdquo; pages, and it is in <strong>Bihar</strong>.</p>
+
+<h2>How the live check was done, and its limits</h2>
+<p><strong>Checked 28 September 2026, for check-in 17 Oct 2026 / check-out 18 Oct 2026.</strong></p>
+<div class="scroll">
+<table>
+  <thead><tr><th>Channel</th><th>What it is</th><th>Result</th></tr></thead>
+  <tbody>
+    <tr><td><span class="num">bookodisha.com</span></td><td>Official Odisha Tourism / OTDC portal &mdash; authoritative inventory</td><td>Rambha <span class="no">sold out</span>; Barkul <span class="yes">available ₹6,000/2 rooms</span>; Gopalpur <span class="yes">available ₹1,800/room</span></td></tr>
+    <tr><td>Goibibo</td><td>Largest OTDC + Rambha inventory</td><td>Rambha <span class="no">sold out</span>; Pearl Tower <span class="yes">₹1,807</span>; Rambha Palace <span class="yes">₹37,170</span></td></tr>
+    <tr><td>Trip.com</td><td>Covers the small local lodges</td><td>Hotel Lake Queen <span class="maybe">not accepting bookings</span></td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="callout warn">
+  <strong>Limits</strong>
+  <ul>
+    <li><strong>Several properties have no online channel at all</strong> (Laxmi Guest House, Hotel Raj, OTDC Rambha's non-AC and dorm rooms, Hotel Lisa Galaxy). Their availability is genuinely unknowable without a phone call. <strong>No price has been estimated or invented for them.</strong></li>
+    <li>Booking-site inventory is an <strong>allotment</strong>, not true vacancy. Small lodges routinely look &ldquo;sold out&rdquo; online while holding rooms for walk-ins.</li>
+    <li>Prices move by day and promotion &mdash; the OTDC Rambha rate ranged ₹1,918 to ₹3,841 by date. Every number is a <strong>28 September 2026 snapshot</strong>.</li>
+    <li>Tier 3 numbers in several cases come only from Facebook, Instagram or YouTube videos. Lodges change mobiles without updating listings, so <strong>a number that does not connect does not mean the hotel is closed.</strong> Entries carry a confidence tier so you know which to trust.</li>
+  </ul>
+</div>
+
+<footer>
+  Compiled and live-checked 28 September 2026 &middot; 24 properties across 4 distance tiers; only 6 are in Rambha, and that is stated rather than padded.<br>
+  Live availability verified against OTDC's official portal (bookodisha.com), Goibibo and Trip.com. Every phone number came from a named public source &mdash; none was invented or estimated.
+</footer>
+
+</div>
+</body>
+</html>
